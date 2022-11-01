@@ -1,0 +1,7 @@
+{
+    "require": {
+        "twig/twig": "^2.15",
+        "slim/slim": "4.*",
+        "slim/psr7": "^0.6.0"
+    }
+}
