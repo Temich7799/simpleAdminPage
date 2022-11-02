@@ -5,18 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sign Up</title>
     <style>
         body {
-            position: relative;
-        }
-
-        main {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, 50%);
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         h1 {
@@ -30,7 +26,6 @@
             align-items: center;
             gap: 5px;
             width: 375px;
-            height: 150px;
             border-radius: 2.5px;
             background-color: rgba(0, 0, 255, .2);
             box-shadow: rgb(0 0 0 / 50%) 0px 0px 12px -2px;
@@ -50,22 +45,24 @@
 
 <body>
     <main>
-        <h1>Welcome!</h1>
-        <form class="form" id="form-login" name="login">
+        <h1>Sign Up</h1>
+        <form class="form" id="form-register" name="login">
+            <label>Email</label>
+            <input name="email" type="email" required />
             <label>Username</label>
             <input name="username" required />
             <label>Password</label>
             <input name="password" type="password" required />
+            <label>Repeat your password</label>
+            <input name="password-repeat" type="password" required />
             <div>
                 <button name="sign-up" id="sign-up">Sign Up</button>
-                <button name="sign-in" type="submit">Sign In</button>
             </div>
-            <a href="reset-password">Reset password</a>
+            <a href=".">Go back</a>
         </form>
     </main>
     <script>
-        const form = document.getElementById('form-login');
-        const signUpButton = document.getElementById('sign-up');
+        const form = document.getElementById('form-register');
 
         form.addEventListener('submit', (submitEvent) => {
 
@@ -78,11 +75,6 @@
                 mode: 'cors',
                 body: formData
             });
-        });
-
-        signUpButton.addEventListener('click', (clickEvent) => {
-            clickEvent.preventDefault();
-            document.location.href += 'sign-up';
         });
     </script>
 </body>
