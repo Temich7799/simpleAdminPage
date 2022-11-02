@@ -7,6 +7,6 @@ use Slim\Factory\AppFactory;
 $app = AppFactory::create();
 $app->setBasePath('/simpleAdminPage');
 
-require './app/views/routes/home_route.php';
+require './app/views/routes/home_page_route.php';
 
 $app->run();
