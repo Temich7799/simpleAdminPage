@@ -6,6 +6,6 @@ class HomePageController extends BaseController
 {
     public function loginPage()
     {
-        return $this->sendRenderedTwigPage('login-page_template.html.twig');
+        return $this->sendRenderedTwigPage('login-page_template.html.twig', ['page_title' => 'Login']);
     }
 }
