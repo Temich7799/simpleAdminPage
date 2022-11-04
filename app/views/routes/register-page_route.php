@@ -16,8 +16,11 @@ $app->post('/sign-up', function ($request,  $response) {
     $data = $request->getParsedBody();
     ['email' => $email,  'username' => $username,  'password' => $password] = $data;
 
-    if ($register_page->registerUser($email,  $username,  $password)) $response->getBody()->write('true');
-    else $response->getBody()->write(true);
+    $result = [
+        'status' => $register_page->registerUser($email,  $username,  $password)
+    ];
+
+    $response->getBody()->write(json_encode($result));
 
     return $response;
 });

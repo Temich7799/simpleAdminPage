@@ -27,12 +27,14 @@
         const formData = new FormData(form);
 
         fetch(document.location.href, {
-            method: 'POST',
-            mode: 'cors',
-            body: formData
-        }).then((response) => {
-            if (response.ok) document.location.href = '.';
-        });
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.status) document.location.href = '.';
+            });
     });
 </script>
 {% endblock %}

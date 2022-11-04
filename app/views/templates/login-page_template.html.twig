@@ -8,8 +8,8 @@
         <label>Password</label>
         <input name="password" type="password" required />
         <div>
-            <button name="sign-up" id="sign-up">Sign Up</button>
             <button name="sign-in" type="submit">Sign In</button>
+            <button name="sign-up" id="sign-up">Sign Up</button>
         </div>
         <a href="reset-password">Reset password</a>
     </form>
@@ -24,14 +24,16 @@
 
         const formData = new FormData(form);
 
-        fetch(document.location.href, {
-            method: 'POST',
-            mode: 'cors',
-            body: formData
-        });
+        fetch(document.location.href + 'sign-in', {
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            })
+            .then((response) => response.json())
+            .then((data) => console.log(data.status));
     });
 
-    signUpButton.addEventListener('click', (clickEvent) => {
+    signUpButton.addEventListener('submit', (clickEvent) => {
         clickEvent.preventDefault();
         document.location.href += 'sign-up';
     });

@@ -1,6 +1,7 @@
 <?php
 
 require './app/models/LoginPageModel.php';
+require './app/controllers/LoginPageContoller.php';
 
 $app->get('/', function ($request,  $response) {
     $login_page = new LoginPageModel();
@@ -8,8 +9,18 @@ $app->get('/', function ($request,  $response) {
     return $response;
 });
 
-$app->post('/', function ($request,  $response) {
-    $body = $request->getParsedBody();
-    echo json_encode($body);
+$app->post('/sign-in', function ($request,  $response) {
+
+    $data = $request->getParsedBody();
+    ['username' => $username,  'password' => $password] = $data;
+
+    $session = new LoginPageContoller($username, $password);
+
+    $result = [
+        'status' => $session->isUserExist()
+    ];
+
+    $response->getBody()->write(json_encode($result));
+
     return $response;
 });
