@@ -30,10 +30,12 @@
                 body: formData
             })
             .then((response) => response.json())
-            .then((data) => console.log(data.status));
+            .then((data) => {
+                if (data.status) document.write(data.content)
+            });
     });
 
-    signUpButton.addEventListener('submit', (clickEvent) => {
+    signUpButton.addEventListener('click', (clickEvent) => {
         clickEvent.preventDefault();
         document.location.href += 'sign-up';
     });
