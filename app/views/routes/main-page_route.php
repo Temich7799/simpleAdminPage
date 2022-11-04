@@ -1,10 +1,11 @@
 <?php
 
-require './app/controllers/HomePageController.php';
+require './app/models/LoginPageModel.php';
 
 $app->get('/', function ($request,  $response) {
-    $login_page = new HomePageController($request,  $response);
-    return $login_page->loginPage();
+    $login_page = new LoginPageModel();
+    $response->getBody()->write($login_page->renderPage());
+    return $response;
 });
 
 $app->post('/', function ($request,  $response) {

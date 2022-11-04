@@ -1,14 +1,9 @@
 <?php
 
-require './app/controllers/RegisterPageController.php';
+require './app/models/RegisterPageModel.php';
 
 $app->get('/sign-up', function ($request,  $response) {
-    $login_page = new RegisterPageController($request,  $response);
-    return $login_page->registerPage();
-});
-/*
-$app->post('/', function ($request,  $response) {
-
+    $register_page = new RegisterPageModel();
+    $response->getBody()->write($register_page->renderPage());
     return $response;
 });
-*/

@@ -1,14 +1,9 @@
 <?php
 
-require './app/controllers/ResetPasswordPageController.php';
+require './app/models/ResetPasswordPageModel.php';
 
 $app->get('/reset-password', function ($request,  $response) {
-    $login_page = new ResetPasswordPageController($request,  $response);
-    return $login_page->resetPasswordPage();
-});
-/*
-$app->post('/', function ($request,  $response) {
-
+    $reset_page = new ResetPasswordPageModel();
+    $response->getBody()->write($reset_page->renderPage());
     return $response;
 });
-*/
