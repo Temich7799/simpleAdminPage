@@ -30,6 +30,8 @@
             method: 'POST',
             mode: 'cors',
             body: formData
+        }).then((response) => {
+            if (response.ok) document.location.href = '.';
         });
     });
 </script>

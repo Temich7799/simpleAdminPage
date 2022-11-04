@@ -14,7 +14,7 @@ class BaseModel
         $this->twig = new Environment($loader);
     }
 
-    protected function renderHTML($template_file_name, $context = [])
+    protected function renderHTML(string $template_file_name, $context = [])
     {
         return $this->twig->render($template_file_name, $context);
     }
