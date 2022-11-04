@@ -2,7 +2,7 @@
 
 require_once './app/models/BaseModel.php';
 
-class LoginPageModel extends BaseModel
+class MainPageModel extends BaseModel
 {
     public function renderPage()
     {

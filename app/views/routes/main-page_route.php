@@ -1,11 +1,11 @@
 <?php
 
-require './app/models/LoginPageModel.php';
+require './app/models/MainPageModel.php';
 require './app/models/UserPageModel.php';
 require './app/controllers/LoginPageContoller.php';
 
 $app->get('/', function ($request,  $response) {
-    $login_page = new LoginPageModel();
+    $login_page = new MainPageModel();
     $response->getBody()->write($login_page->renderPage());
     return $response;
 });
