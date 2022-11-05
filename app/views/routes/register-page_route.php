@@ -16,9 +16,7 @@ $app->post('/sign-up', function ($request,  $response) {
     $data = $request->getParsedBody();
     ['email' => $email,  'username' => $username,  'password' => $password] = $data;
 
-    $result = [
-        'status' => $register_page->registerUser($email,  $username,  $password)
-    ];
+    $result = $register_page->registerUser($email,  $username,  $password);
 
     $response->getBody()->write(json_encode($result));
 
