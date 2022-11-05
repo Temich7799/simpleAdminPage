@@ -29,7 +29,7 @@ class BaseModel extends LoginPageContoller
 
     protected function isSessionExist()
     {
-        if ($_COOKIE) {
+        if (isset($_COOKIE['sid'])) {
             $result =  mysqli_fetch_row($this->makeQueryToSQL("SELECT `session_id` FROM `users` WHERE `session_id` = '" . $_COOKIE['sid'] . "'"));
             if ($result === null || $result === false) return false;
             else return true;
