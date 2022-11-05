@@ -1,6 +1,6 @@
 <?php
 
-require_once './app/controllers/BaseController.php';
+require_once 'BaseController.php';
 
 class RegisterPageController extends BaseController
 {

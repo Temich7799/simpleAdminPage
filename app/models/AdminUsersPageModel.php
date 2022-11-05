@@ -1,6 +1,6 @@
 <?php
 
-require_once './app/models/BaseModel.php';
+require_once 'BaseModel.php';
 
 class AdminUsersPageModel extends BaseModel
 {

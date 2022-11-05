@@ -1,12 +1,6 @@
 <?php
 class BaseController
 {
-    protected $app;
-
-    public function __construct()
-    {
-    }
-
     protected function makeQueryToSQL(string $sql)
     {
         $connect = mysqli_connect('localhost', 'root', 'root', 'simple_admin_page_db');
