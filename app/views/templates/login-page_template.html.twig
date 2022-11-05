@@ -31,8 +31,35 @@
             })
             .then((response) => response.json())
             .then((data) => {
-                if (data.status) document.write(data.content)
+                if (data.status === true) document.write(data.content);
+                if (data.status === false) displayError(data.content);
+            })
+            .catch((error) => {
+                error && displayError('An error has occurred. Please, try again');
             });
+
+        function displayError(message) {
+
+            const errorMessage = document.createElement('p');
+            errorMessage.append(message);
+            form.append(errorMessage);
+
+            form.addEventListener('click', formOnClickHandler);
+
+            function formOnClickHandler(clickEvent) {
+
+                const inputElement = clickEvent.target.closest('input');
+
+                inputElement.addEventListener('input', onInputHandler);
+
+                form.removeEventListener('click', formOnClickHandler);
+
+                function onInputHandler() {
+                    form.removeChild(errorMessage);
+                    inputElement.removeEventListener('input', onInputHandler);
+                }
+            }
+        }
     });
 
     signUpButton.addEventListener('click', (clickEvent) => {

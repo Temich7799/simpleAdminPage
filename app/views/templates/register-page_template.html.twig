@@ -33,8 +33,35 @@
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
+                if (data.status === false) displayError(data.content);
+            })
+            .catch(() => {
+                displayError('An error has occurred. Please, try again');
             });
+
+        function displayError(message) {
+
+            const errorMessage = document.createElement('p');
+            errorMessage.append(message);
+            form.append(errorMessage);
+
+            form.addEventListener('click', formOnClickHandler);
+
+            function formOnClickHandler(clickEvent) {
+
+                const inputElement = clickEvent.target.closest('input');
+
+                inputElement.addEventListener('input', onInputHandler);
+
+                form.removeEventListener('click', formOnClickHandler);
+
+                function onInputHandler() {
+                    form.removeChild(errorMessage);
+                    inputElement.removeEventListener('input', onInputHandler);
+                }
+            }
+        }
     });
 </script>
+{% block display_error_script %}{% endblock %}
 {% endblock %}
