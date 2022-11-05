@@ -2,11 +2,11 @@
 
 require './app/models/MainPageModel.php';
 require './app/models/UserPageModel.php';
-require './app/controllers/LoginPageContoller.php';
+require_once './app/controllers/LoginPageContoller.php';
 
 $app->get('/', function ($request,  $response) {
-    $login_page = new MainPageModel();
-    $response->getBody()->write($login_page->renderPage());
+    $main_page = new MainPageModel();
+    $response->getBody()->write($main_page->renderPage());
     return $response;
 });
 
@@ -16,17 +16,17 @@ $app->post('/sign-in', function ($request,  $response) {
     ['username' => $username,  'password' => $password] = $data;
 
     $session = new LoginPageContoller($username, $password);
-    $is_user_exist = $session->isUserExist();
+    $login_status = $session->loginUser();
 
     $content = '';
 
-    if ($is_user_exist == true) {
+    if ($login_status == true) {
         $user_page = new UserPageModel();
         $content = $user_page->renderPage();
     } else $content = 'This user is not found or your password is wrong';
 
     $result = [
-        'status' => $is_user_exist,
+        'status' => $login_status,
         'content' => $content
     ];
 
