@@ -1,68 +1,71 @@
 {% extends 'base.html.twig' %}
-{% block content_main %}
-<main>
-    <h1>Sign Up</h1>
-    <form class="form" id="form-register" name="login">
-        <label>Email</label>
-        <input name="email" type="email" required />
-        <label>Username</label>
-        <input name="username" required />
-        <label>Password</label>
-        <input name="password" type="password" required />
-        <label>Repeat your password</label>
-        <input name="password-repeat" type="password" required />
-        <div>
-            <button name="sign-up" id="sign-up">Sign Up</button>
-        </div>
-        <a href=".">Go back</a>
-    </form>
-</main>
-<script>
-    const form = document.getElementById('form-register');
+{% block body %}
 
-    form.addEventListener('submit', (submitEvent) => {
+<body>
+    <main>
+        <h1>Sign Up</h1>
+        <form class="form" id="form-register" name="login">
+            <label>Email</label>
+            <input name="email" type="email" required />
+            <label>Username</label>
+            <input name="username" required />
+            <label>Password</label>
+            <input name="password" type="password" required />
+            <label>Repeat your password</label>
+            <input name="password-repeat" type="password" required />
+            <div>
+                <button name="sign-up" id="sign-up">Sign Up</button>
+            </div>
+            <a href=".">Go back</a>
+        </form>
+    </main>
+    <script>
+        const form = document.getElementById('form-register');
 
-        submitEvent.preventDefault();
+        form.addEventListener('submit', (submitEvent) => {
 
-        const formData = new FormData(form);
+            submitEvent.preventDefault();
 
-        fetch(document.location.href, {
-                method: 'POST',
-                mode: 'cors',
-                body: formData
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.status === true) document.location.href = '.';
-                if (data.status === false) displayError(data.content);
-            })
-            .catch(() => {
-                displayError('An error has occurred. Please, try again');
-            });
+            const formData = new FormData(form);
 
-        function displayError(message) {
+            fetch(document.location.href, {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status === true) document.location.href = '.';
+                    if (data.status === false) displayError(data.content);
+                })
+                .catch(() => {
+                    displayError('An error has occurred. Please, try again');
+                });
 
-            const errorMessage = document.createElement('p');
-            errorMessage.append(message);
-            form.append(errorMessage);
+            function displayError(message) {
 
-            form.addEventListener('click', formOnClickHandler);
+                const errorMessage = document.createElement('p');
+                errorMessage.append(message);
+                form.append(errorMessage);
 
-            function formOnClickHandler(clickEvent) {
+                form.addEventListener('click', formOnClickHandler);
 
-                const inputElement = clickEvent.target.closest('input');
+                function formOnClickHandler(clickEvent) {
 
-                inputElement.addEventListener('input', onInputHandler);
+                    const inputElement = clickEvent.target.closest('input');
 
-                form.removeEventListener('click', formOnClickHandler);
+                    inputElement.addEventListener('input', onInputHandler);
 
-                function onInputHandler() {
-                    form.removeChild(errorMessage);
-                    inputElement.removeEventListener('input', onInputHandler);
+                    form.removeEventListener('click', formOnClickHandler);
+
+                    function onInputHandler() {
+                        form.removeChild(errorMessage);
+                        inputElement.removeEventListener('input', onInputHandler);
+                    }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
+</body>
 {% block display_error_script %}{% endblock %}
 {% endblock %}

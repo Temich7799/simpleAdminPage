@@ -1,70 +1,73 @@
 {% extends 'base.html.twig' %}
-{% block content_main %}
-<main>
-    <h1>Welcome!</h1>
-    <form class="form" id="form-login" name="login">
-        <label>Username</label>
-        <input name="username" required />
-        <label>Password</label>
-        <input name="password" type="password" required />
-        <div>
-            <button name="sign-in" type="submit">Sign In</button>
-            <button name="sign-up" id="sign-up">Sign Up</button>
-        </div>
-        <a href="reset-password">Reset password</a>
-    </form>
-</main>
-<script>
-    const form = document.getElementById('form-login');
-    const signUpButton = document.getElementById('sign-up');
+{% block body %}
 
-    form.addEventListener('submit', (submitEvent) => {
+<body>
+    <main>
+        <h1>Welcome!</h1>
+        <form class="form" id="form-login" name="login">
+            <label>Username</label>
+            <input name="username" required />
+            <label>Password</label>
+            <input name="password" type="password" required />
+            <div>
+                <button name="sign-in" type="submit">Sign In</button>
+                <button name="sign-up" id="sign-up">Sign Up</button>
+            </div>
+            <a href="reset-password">Reset password</a>
+        </form>
+    </main>
+    <script>
+        const form = document.getElementById('form-login');
+        const signUpButton = document.getElementById('sign-up');
 
-        submitEvent.preventDefault();
+        form.addEventListener('submit', (submitEvent) => {
 
-        const formData = new FormData(form);
+            submitEvent.preventDefault();
 
-        fetch(document.location.href + 'sign-in', {
-                method: 'POST',
-                mode: 'cors',
-                body: formData
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.status === true) document.location.href = '.';
-                if (data.status === false) displayError(data.content);
-            })
-            .catch((error) => {
-                error && displayError('An error has occurred. Please, try again');
-            });
+            const formData = new FormData(form);
 
-        function displayError(message) {
+            fetch(document.location.href + 'sign-in', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status === true) document.location.href = '.';
+                    if (data.status === false) displayError(data.content);
+                })
+                .catch((error) => {
+                    error && displayError('An error has occurred. Please, try again');
+                });
 
-            const errorMessage = document.createElement('p');
-            errorMessage.append(message);
-            form.append(errorMessage);
+            function displayError(message) {
 
-            form.addEventListener('click', formOnClickHandler);
+                const errorMessage = document.createElement('p');
+                errorMessage.append(message);
+                form.append(errorMessage);
 
-            function formOnClickHandler(clickEvent) {
+                form.addEventListener('click', formOnClickHandler);
 
-                const inputElement = clickEvent.target.closest('input');
+                function formOnClickHandler(clickEvent) {
 
-                inputElement.addEventListener('input', onInputHandler);
+                    const inputElement = clickEvent.target.closest('input');
 
-                form.removeEventListener('click', formOnClickHandler);
+                    inputElement.addEventListener('input', onInputHandler);
 
-                function onInputHandler() {
-                    form.removeChild(errorMessage);
-                    inputElement.removeEventListener('input', onInputHandler);
+                    form.removeEventListener('click', formOnClickHandler);
+
+                    function onInputHandler() {
+                        form.removeChild(errorMessage);
+                        inputElement.removeEventListener('input', onInputHandler);
+                    }
                 }
             }
-        }
-    });
+        });
 
-    signUpButton.addEventListener('click', (clickEvent) => {
-        clickEvent.preventDefault();
-        document.location.href += 'sign-up';
-    });
-</script>
+        signUpButton.addEventListener('click', (clickEvent) => {
+            clickEvent.preventDefault();
+            document.location.href += 'sign-up';
+        });
+    </script>
+</body>
 {% endblock %}
