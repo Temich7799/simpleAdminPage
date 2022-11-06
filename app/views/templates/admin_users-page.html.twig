@@ -1,8 +1,28 @@
-{% extends 'content.html.twig' %}
+{% extends 'admin_content.html.twig' %}
 
 {% block main %}
 <main>
     <h1>{{page_title}}</h1>
     <h2>Users</h2>
+    <main>
+        <table>
+            <tr>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Session ID</th>
+                <th>IP</th>
+                <th>Status</th>
+            </tr>
+            {% for key in data %}
+            <tr>
+                {% for item in key %}
+                <td>{{ item }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </main>
 </main>
 {% endblock %}

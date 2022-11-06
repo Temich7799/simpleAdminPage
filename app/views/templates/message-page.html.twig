@@ -2,14 +2,13 @@
 {% block body %}
 
 <body>
-    <header>
-        <h1>Header</h1>
-        <nav>
-            {% block header_menu %}{% endblock %}
-        </nav>
-        <button id="log-out-button">Log out</button>
-    </header>
-    {% block main %}{% endblock %}
+    <main>
+        <form class="form">
+            <p>{{ message }}</p>
+            <a href=".">Go back</a>
+            <button id="log-out-button">Log out</button>
+        </form>
+    </main>
     <script>
         const button = document.getElementById('log-out-button');
 
