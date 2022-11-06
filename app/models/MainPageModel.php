@@ -6,7 +6,7 @@ class MainPageModel extends BaseModel
 {
     public function renderPage()
     {
-        return $this->renderHTML('user_users-page_template.html.twig', [
+        return $this->renderHTML('user_users-page.html.twig', [
             'page_title' => 'Users',
             'data' => $this->getUsersList()
         ]);

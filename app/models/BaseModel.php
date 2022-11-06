@@ -24,7 +24,7 @@ class BaseModel extends LoginPageContoller
     protected function renderHTML(string $template_file_name, $context = [])
     {
         if ($this->is_user_logged === true) return $this->twig->render($template_file_name, $context);
-        else return $this->twig->render('login-page_template.html.twig', ['page_title' => 'Login']);
+        else return $this->twig->render('login-page.html.twig', ['page_title' => 'Login']);
     }
 
     protected function isSessionActually()
