@@ -6,8 +6,14 @@ class UsersPageModel extends MainPageModel
 {
     public function renderPage()
     {
-        if ($this->is_admin === true) return $this->renderHTML('admin_users-page.html.twig', ['data' => $this->getUsersList()]);
-        else return $this->renderHTML('user_users-page.html.twig', ['data' => $this->getUsersList()]);
+        if ($this->is_admin === true) return $this->renderHTML('admin_users-page.html.twig', [
+            'session_id' => session_id(),
+            'data' => $this->getUsersList()
+        ]);
+        else return $this->renderHTML('user_users-page.html.twig', [
+            'session_id' => session_id(),
+            'data' => $this->getUsersList()
+        ]);
     }
 
     protected function getUsersList()
