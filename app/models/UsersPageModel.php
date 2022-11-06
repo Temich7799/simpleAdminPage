@@ -2,11 +2,15 @@
 
 require_once 'MainPageModel.php';
 
-class UserPageModel extends MainPageModel
+class UsersPageModel extends MainPageModel
 {
+
     public function renderPage()
     {
-        return $this->renderHTML('user_users-page.html.twig', ['page_title' => 'Home']);
+        return $this->renderHTML('user_users-page.html.twig', [
+            'page_title' => 'Home',
+            'data' => $this->getUsersList()
+        ]);
     }
 
     protected function getUsersList()

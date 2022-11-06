@@ -1,8 +1,8 @@
 <?php
 
-require_once 'BaseModel.php';
+require_once 'MainPageModel.php';
 
-class AdminSessionsPageModel extends BaseModel
+class SessionsPageModel extends MainPageModel
 {
     public function renderPage()
     {
