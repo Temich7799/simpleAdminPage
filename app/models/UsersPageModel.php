@@ -13,6 +13,6 @@ class UsersPageModel extends MainPageModel
     protected function getUsersList()
     {
         if ($this->is_admin === false) return mysqli_fetch_all($this->makeQueryToSQL("SELECT `username`, `status` FROM `users` WHERE 1"));
-        else return mysqli_fetch_all($this->makeQueryToSQL("SELECT * FROM `users` WHERE 1"));
+        else return mysqli_fetch_all($this->makeQueryToSQL("SELECT `email`, `username`, `role`,`status` FROM `users` WHERE 1"));
     }
 }

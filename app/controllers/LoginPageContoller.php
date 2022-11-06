@@ -6,9 +6,19 @@ class LoginPageContoller extends BaseController
     private $username;
     private $password;
 
+    protected $is_user_logged = false;
+    protected $is_admin = false;
+
+    public function __construct()
+    {
+        if ($this->isSessionActually() === true) {
+            $this->is_user_logged = true;
+            $this->saveSession();
+        }
+    }
+
     public function loginUser(string $username, string $password)
     {
-
         $this->username = $username;
         $this->password = $password;
 
@@ -24,9 +34,9 @@ class LoginPageContoller extends BaseController
         } else return false;
     }
 
-    public function logOutUser()
+    public function logOutUser(string $session_id)
     {
-        $this->makeQueryToSQL("UPDATE `users` SET `session_id`='NULL',`status`='offline' WHERE `session_id` = '" . $_COOKIE['sid'] . "'");
+        $this->makeQueryToSQL("UPDATE `users` SET `session_id`='NULL',`status`='offline' WHERE `session_id` = '" . $session_id . "'");
     }
 
     protected function saveSession()
@@ -44,5 +54,24 @@ class LoginPageContoller extends BaseController
         if ($email_address !== null || $email_address !== false) {
             mail($email_address, 'Your account was logged in', 'Details');
         }
+    }
+
+    protected function isSessionActually()
+    {
+        if (isset($_COOKIE['sid'])) {
+            $result =  mysqli_fetch_row($this->makeQueryToSQL("SELECT `session_id` FROM `users` WHERE `session_id` = '" . $_COOKIE['sid'] . "'"));
+            if ($result === null || $result === false) return false;
+            else return true;
+        } else return false;
+    }
+
+    protected function checkForAdmin()
+    {
+        if ($this->is_user_logged === true) {
+            $result = mysqli_fetch_row($this->makeQueryToSQL("SELECT `role` FROM `users` WHERE `session_id` = '" . session_id() . "'"))[0];
+            if ($result === 'admin') return true;
+            else return false;
+        }
+        return false;
     }
 }
