@@ -3,7 +3,6 @@
 require_once 'BaseController.php';
 class LoginPageContoller extends BaseController
 {
-
     private $username;
     private $password;
 

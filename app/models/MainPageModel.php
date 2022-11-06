@@ -6,6 +6,14 @@ class MainPageModel extends BaseModel
 {
     public function renderPage()
     {
-        return $this->renderHTML('admin_sessions-page_template.html.twig', ['page_title' => 'Login']);
+        return $this->renderHTML('user_users-page_template.html.twig', [
+            'page_title' => 'Users',
+            'data' => $this->getUsersList()
+        ]);
+    }
+
+    protected function getUsersList()
+    {
+        return mysqli_fetch_all($this->makeQueryToSQL("SELECT `username`, `status` FROM `users` WHERE 1"));
     }
 }
