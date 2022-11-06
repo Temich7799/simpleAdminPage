@@ -15,7 +15,7 @@ class BaseModel extends LoginPageContoller
         $loader = new FilesystemLoader('app/views/templates');
         $this->twig = new Environment($loader);
 
-        if ($this->isSessionExist() === true) {
+        if ($this->isSessionActually() === true) {
             $this->is_user_logged = true;
             $this->saveSession();
         }
@@ -27,7 +27,7 @@ class BaseModel extends LoginPageContoller
         else return $this->twig->render('login-page_template.html.twig', ['page_title' => 'Login']);
     }
 
-    protected function isSessionExist()
+    protected function isSessionActually()
     {
         if (isset($_COOKIE['sid'])) {
             $result =  mysqli_fetch_row($this->makeQueryToSQL("SELECT `session_id` FROM `users` WHERE `session_id` = '" . $_COOKIE['sid'] . "'"));

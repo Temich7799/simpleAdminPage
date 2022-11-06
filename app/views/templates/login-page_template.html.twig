@@ -31,7 +31,7 @@
             })
             .then((response) => response.json())
             .then((data) => {
-                if (data.status === true) document.write(data.content);
+                if (data.status === true) document.location.href = '.';
                 if (data.status === false) displayError(data.content);
             })
             .catch((error) => {
