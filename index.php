@@ -10,5 +10,6 @@ $app->setBasePath('/simpleAdminPage');
 require './app/views/routes/main-page_route.php';
 require './app/views/routes/register-page_route.php';
 require './app/views/routes/reset_password-page_route.php';
+require './app/views/routes/sign-in_route.php';
 
 $app->run();
