@@ -6,14 +6,12 @@ class LoginPageContoller extends BaseController
     private $username;
     private $password;
 
-    public function __construct(string $username, string $password)
+    public function loginUser(string $username, string $password)
     {
+
         $this->username = $username;
         $this->password = $password;
-    }
 
-    public function loginUser()
-    {
         $query = mysqli_fetch_row($this->makeQueryToSQL("SELECT `password` FROM `users` WHERE `username` = '" . $this->username . "'"));
 
         if ($query !== null) {
@@ -24,6 +22,11 @@ class LoginPageContoller extends BaseController
                 return true;
             } else return false;
         } else return false;
+    }
+
+    public function logOutUser()
+    {
+        $this->makeQueryToSQL("UPDATE `users` SET `session_id`='NULL',`status`='offline' WHERE `session_id` = '" . $_COOKIE['sid'] . "'");
     }
 
     protected function saveSession()

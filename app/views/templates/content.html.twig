@@ -19,9 +19,14 @@
 
         button.addEventListener('click', () => {
 
-            document.cookie = `sid=0; max-age=0`;
-            console.log(document.cookie)
-            document.location.href = '.';
+            fetch('sign-out', {
+                    method: 'POST',
+                    mode: 'cors'
+                })
+                .then(() => {
+                    document.cookie = `sid=0; max-age=0`;
+                    document.location.href = '.';
+                });
         });
     </script>
 </body>

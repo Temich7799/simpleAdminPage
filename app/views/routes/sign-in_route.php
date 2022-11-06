@@ -7,8 +7,8 @@ $app->post('/sign-in', function ($request,  $response) {
     $data = $request->getParsedBody();
     ['username' => $username,  'password' => $password] = $data;
 
-    $session = new LoginPageContoller($username, $password);
-    $login_status = $session->loginUser();
+    $session = new LoginPageContoller();
+    $login_status = $session->loginUser($username, $password);
 
     $content = '';
 
