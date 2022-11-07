@@ -17,12 +17,14 @@ To start a project:
   - email
   - username
   - password
-  - session_id
-  - role
-  - status
+  - session_id (null by default)
+  - role (user or admin, can be null by default)
+  - status (null by default)
   
-3) Specify db_name, username, etc in: app/controllers/BaseController.php
- 
-4) Open project folder in terminal and run: composer install
+3) Create one user (role = admin) manually in phpMyAdmin
 
-5) Run the server and open project in the browser (http://localhost:<port>/simpleAdminPage)
+4) Specify db_name, username, etc in: app/controllers/BaseController.php
+ 
+5) Open project folder in terminal and run: composer install
+
+6) Run the server and open project in the browser (http://localhost:<port>/simpleAdminPage)
