@@ -2,18 +2,25 @@
 
 {% block main %}
 <main>
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>Status</th>
-        </tr>
-        {% for key in data %}
-        <tr>
-            {% for item in key %}
-            <td>{{ item }}</td>
+    <table id="table" class="ui celled table" style="min-width: 500px">
+        <caption>
+            <h2>Users</h2>
+        </caption>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in data %}
+            <tr>
+                {% for item in key %}
+                <td>{{ item }}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}
+        </tbody>
     </table>
 </main>
 {% endblock %}

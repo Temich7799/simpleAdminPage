@@ -2,23 +2,29 @@
 
 {% block main %}
 <main>
-    <h1>{{page_title}}</h1>
-    <h2>Users</h2>
-    <table>
-        <tr>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Status</th>
-        </tr>
-        {% for key in data %}
-        <tr>
-            {% for item in key %}
-            <td>{{ item }}</td>
+    <table id="table" class="ui celled table" style="width: 75%">
+        <caption>
+            <h2>Users</h2>
+        </caption>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in data %}
+            <tr>
+                {% for item in key %}
+                <td>{{ item }}</td>
+                {% endfor %}
+                <td><button value={{key[1]}} id="button-delete">Delete User</button></td>
+            </tr>
             {% endfor %}
-            <td><button value={{key[1]}} id="button-delete">Delete User</button></td>
-        </tr>
-        {% endfor %}
+        </tbody>
     </table>
 </main>
 <script>
