@@ -40,14 +40,14 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.status === true) document.location.href = '.';
-                        if (data.status === false) displayError(data.content);
+                        if (data.status === false) displayMessage(data.content);
                     })
                     .catch(() => {
-                        displayError('An error has occurred. Please, try again');
+                        displayMessage('An error has occurred. Please, try again');
                     });
-            } else displayError('Passwords are dont match');
+            } else displayMessage('Passwords are dont match');
 
-            function displayError(message) {
+            function displayMessage(message) {
 
                 const errorMessage = document.createElement('p');
                 errorMessage.append(message);
