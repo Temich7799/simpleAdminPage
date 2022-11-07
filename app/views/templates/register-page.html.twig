@@ -28,19 +28,24 @@
 
             const formData = new FormData(form);
 
-            fetch(document.location.href, {
-                    method: 'POST',
-                    mode: 'cors',
-                    body: formData
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.status === true) document.location.href = '.';
-                    if (data.status === false) displayError(data.content);
-                })
-                .catch(() => {
-                    displayError('An error has occurred. Please, try again');
-                });
+            const password1 = document.getElementsByName('password')[0].value;
+            const password2 = document.getElementsByName('password-repeat')[0].value;
+
+            if (password1 === password2) {
+                fetch(document.location.href, {
+                        method: 'POST',
+                        mode: 'cors',
+                        body: formData
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.status === true) document.location.href = '.';
+                        if (data.status === false) displayError(data.content);
+                    })
+                    .catch(() => {
+                        displayError('An error has occurred. Please, try again');
+                    });
+            } else displayError('Passwords are dont match');
 
             function displayError(message) {
 
